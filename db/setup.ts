@@ -1,8 +1,12 @@
+import "dotenv/config";
 import { createClient } from "@libsql/client";
 import { randomUUID } from "crypto";
 
 async function main() {
-  const client = createClient({ url: "file:./sqlite.db" });
+  const client = createClient({
+    url: process.env.TURSO_DATABASE_URL!,
+    authToken: process.env.TURSO_AUTH_TOKEN!,
+  });
 
   await client.execute(`
     CREATE TABLE IF NOT EXISTS users (
@@ -30,7 +34,7 @@ async function main() {
   await client.execute(`
     CREATE TABLE IF NOT EXISTS orders (
       id TEXT PRIMARY KEY,
-      user_id TEXT NOT NULL REFERENCES users(id),
+      user_id TEXT NOT NULL,
       status TEXT NOT NULL DEFAULT 'pending',
       total REAL NOT NULL,
       shipping_name TEXT NOT NULL,
@@ -42,16 +46,19 @@ async function main() {
   await client.execute(`
     CREATE TABLE IF NOT EXISTS order_items (
       id TEXT PRIMARY KEY,
-      order_id TEXT NOT NULL REFERENCES orders(id),
-      product_id TEXT NOT NULL REFERENCES products(id),
+      order_id TEXT NOT NULL,
+      product_id TEXT NOT NULL,
       product_name TEXT NOT NULL,
       quantity INTEGER NOT NULL,
       price_at_purchase REAL NOT NULL
     );
   `);
 
-  const existing = await client.execute("SELECT COUNT(*) as count FROM products");
-  const count = Number((existing.rows[0] as any).count);
+  const existing = await client.execute(
+    "SELECT COUNT(*) as count FROM products"
+  );
+
+  const count = Number(existing.rows[0].count);
 
   if (count === 0) {
     const sampleProducts = [
@@ -84,7 +91,8 @@ async function main() {
       },
       {
         name: "Ceramic Coffee Mug",
-        description: "Handcrafted ceramic mug, microwave and dishwasher safe, 12oz capacity.",
+        description:
+          "Handcrafted ceramic mug, microwave and dishwasher safe, 12oz capacity.",
         price: 14.99,
         imageUrl: "https://picsum.photos/seed/mug/600/600",
         category: "Home",
@@ -101,7 +109,8 @@ async function main() {
       },
       {
         name: "Desk Lamp",
-        description: "Adjustable LED desk lamp with 3 brightness levels and USB charging port.",
+        description:
+          "Adjustable LED desk lamp with 3 brightness levels and USB charging port.",
         price: 32.99,
         imageUrl: "https://picsum.photos/seed/lamp/600/600",
         category: "Home",
@@ -109,7 +118,8 @@ async function main() {
       },
       {
         name: "Leather Wallet",
-        description: "Slim genuine leather wallet with RFID-blocking technology.",
+        description:
+          "Slim genuine leather wallet with RFID-blocking technology.",
         price: 28.0,
         imageUrl: "https://picsum.photos/seed/wallet/600/600",
         category: "Accessories",
@@ -117,7 +127,8 @@ async function main() {
       },
       {
         name: "Bluetooth Speaker",
-        description: "Portable waterproof Bluetooth speaker with 12-hour playtime.",
+        description:
+          "Portable waterproof Bluetooth speaker with 12-hour playtime.",
         price: 59.99,
         imageUrl: "https://picsum.photos/seed/speaker/600/600",
         category: "Electronics",
@@ -127,8 +138,11 @@ async function main() {
 
     for (const p of sampleProducts) {
       await client.execute({
-        sql: `INSERT INTO products (id, name, description, price, image_url, category, stock, created_at)
-              VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+        sql: `
+          INSERT INTO products
+          (id, name, description, price, image_url, category, stock, created_at)
+          VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        `,
         args: [
           randomUUID(),
           p.name,
@@ -141,12 +155,13 @@ async function main() {
         ],
       });
     }
+
     console.log(`Seeded ${sampleProducts.length} products.`);
   } else {
     console.log("Products already seeded, skipping.");
   }
 
-  console.log("Database setup complete: sqlite.db");
+  console.log("Database setup complete.");
 }
 
 main().catch((err) => {
