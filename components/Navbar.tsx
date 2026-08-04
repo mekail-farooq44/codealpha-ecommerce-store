@@ -12,7 +12,7 @@ export default function Navbar() {
     <header className="border-b border-neutral-200 bg-white sticky top-0 z-50">
       <nav className="max-w-6xl mx-auto flex items-center justify-between px-4 py-4">
         <Link href="/" className="text-xl font-semibold tracking-tight text-neutral-900">
-          MekaStore
+          MekaShop
         </Link>
 
         <div className="flex items-center gap-6 text-sm font-medium text-neutral-700">
