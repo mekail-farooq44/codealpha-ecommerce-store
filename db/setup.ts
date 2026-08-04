@@ -67,7 +67,7 @@ async function main() {
         description:
           "Over-ear wireless headphones with active noise cancellation and 30-hour battery life.",
         price: 89.99,
-        imageUrl: "https://picsum.photos/seed/headphones/600/600",
+        imageUrl: "/products/headphones.jpg",
         category: "Electronics",
         stock: 25,
       },
@@ -76,7 +76,7 @@ async function main() {
         description:
           "Fitness tracking smart watch with heart-rate monitor, GPS, and week-long battery life.",
         price: 149.99,
-        imageUrl: "https://picsum.photos/seed/smartwatch/600/600",
+        imageUrl: "/products/smartwatch.jpg",
         category: "Electronics",
         stock: 15,
       },
@@ -85,7 +85,7 @@ async function main() {
         description:
           "Durable canvas backpack with padded laptop sleeve, perfect for daily commutes.",
         price: 45.5,
-        imageUrl: "https://picsum.photos/seed/backpack/600/600",
+        imageUrl: "/products/backpack.jpg",
         category: "Accessories",
         stock: 40,
       },
@@ -94,7 +94,7 @@ async function main() {
         description:
           "Handcrafted ceramic mug, microwave and dishwasher safe, 12oz capacity.",
         price: 14.99,
-        imageUrl: "https://picsum.photos/seed/mug/600/600",
+        imageUrl: "/products/mug.jpg",
         category: "Home",
         stock: 100,
       },
@@ -103,7 +103,7 @@ async function main() {
         description:
           "Lightweight running shoes with breathable mesh upper and responsive cushioning.",
         price: 79.0,
-        imageUrl: "https://picsum.photos/seed/shoes/600/600",
+        imageUrl: "/products/shoes.jpg",
         category: "Footwear",
         stock: 30,
       },
@@ -112,7 +112,7 @@ async function main() {
         description:
           "Adjustable LED desk lamp with 3 brightness levels and USB charging port.",
         price: 32.99,
-        imageUrl: "https://picsum.photos/seed/lamp/600/600",
+        imageUrl: "/products/lamp.jpg",
         category: "Home",
         stock: 20,
       },
@@ -121,7 +121,7 @@ async function main() {
         description:
           "Slim genuine leather wallet with RFID-blocking technology.",
         price: 28.0,
-        imageUrl: "https://picsum.photos/seed/wallet/600/600",
+        imageUrl: "/products/wallet.jpg",
         category: "Accessories",
         stock: 50,
       },
@@ -130,7 +130,7 @@ async function main() {
         description:
           "Portable waterproof Bluetooth speaker with 12-hour playtime.",
         price: 59.99,
-        imageUrl: "https://picsum.photos/seed/speaker/600/600",
+        imageUrl: "/products/speaker.jpg",
         category: "Electronics",
         stock: 35,
       },
