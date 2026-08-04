@@ -22,7 +22,7 @@ export default function RootLayout({
             <Navbar />
             <main className="flex-1">{children}</main>
             <footer className="border-t border-neutral-200 py-6 text-center text-sm text-neutral-500">
-              Shopfront demo store — built with Next.js
+              MekaShop © 2026. All Rights Reserved.
             </footer>
           </CartProvider>
         </AuthProvider>
